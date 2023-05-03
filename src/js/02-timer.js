@@ -22,20 +22,17 @@ const options = {
       return alert('Please choose a date in the future');
     }
     startBtn.disabled = false;
-    startBtn.addEventListener('click', () => {
-      timerCounter(selectedDates[0]);
-    });
+    startBtn.addEventListener('click', timerCounter);
   },
 };
 
 flatpickr(input, options);
 
 function timerCounter() {
+  startBtn.disabled = true;
+  input.disabled = true;
   let timer = setInterval(() => {
     let timeCounter = new Date(input.value) - new Date();
-
-    startBtn.disabled = true;
-    input.disabled = true;
 
     if (timeCounter >= 0) {
       let timerValue = convertMs(timeCounter);

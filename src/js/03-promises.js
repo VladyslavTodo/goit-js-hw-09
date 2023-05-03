@@ -18,14 +18,10 @@ function onFormSubmit(event) {
   for (let position = 1; position <= amountValue; position += 1) {
     createPromise(position, delayValue)
       .then(({ position, delayValue }) => {
-        setTimeout(() => {
-          Notify.success(`✅ Fulfilled promise ${position} in ${delayValue}ms`);
-        }, delayValue);
+        Notify.success(`✅ Fulfilled promise ${position} in ${delayValue}ms`);
       })
       .catch(({ position, delayValue }) => {
-        setTimeout(() => {
-          Notify.failure(`❌ Rejected promise ${position} in ${delayValue}ms`);
-        }, delayValue);
+        Notify.failure(`❌ Rejected promise ${position} in ${delayValue}ms`);
       });
     delayValue += stepValue;
   }
@@ -36,9 +32,11 @@ function createPromise(position, delayValue) {
   let promiseValue = { position, delayValue };
 
   return new Promise((resolve, reject) => {
-    if (shouldResolve) {
-      resolve(promiseValue);
-    }
-    reject(promiseValue);
+    setTimeout(() => {
+      if (shouldResolve) {
+        resolve(promiseValue);
+      }
+      reject(promiseValue);
+    }, delayValue);
   });
 }
