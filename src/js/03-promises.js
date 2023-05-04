@@ -9,11 +9,12 @@ const amount = document.querySelector('.form [name="amount"]');
 form.addEventListener('submit', onFormSubmit);
 
 function onFormSubmit(event) {
+  'use strict';
   event.preventDefault();
 
-  delayValue = Number(delay.value);
-  stepValue = Number(step.value);
-  amountValue = Number(amount.value);
+  let delayValue = Number(delay.value);
+  let stepValue = Number(step.value);
+  let amountValue = Number(amount.value);
 
   for (let position = 1; position <= amountValue; position += 1) {
     createPromise(position, delayValue)

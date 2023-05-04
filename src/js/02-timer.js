@@ -20,11 +20,16 @@ const options = {
     if (selectedDates[0] < options.defaultDate) {
       startBtn.disabled = true;
       return alert('Please choose a date in the future');
+    } else {
+      startBtn.disabled = false;
     }
-    startBtn.disabled = false;
-    startBtn.addEventListener('click', timerCounter);
   },
 };
+
+// startBtn.disabled = true;
+startBtn.addEventListener('click', () => {
+  timerCounter();
+});
 
 flatpickr(input, options);
 
@@ -40,11 +45,13 @@ function timerCounter() {
       dataHours.textContent = timerValue.hours;
       dataMinutes.textContent = timerValue.minutes;
       dataSeconds.textContent = timerValue.seconds;
+      console.log(timeCounter);
     } else {
       clearInterval(timer);
     }
   }, 1000);
 }
+console.log(timerCounter);
 
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
